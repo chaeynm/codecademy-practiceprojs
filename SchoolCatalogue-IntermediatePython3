@@ -1,0 +1,69 @@
+class School():
+  def __init__(self,name,level, numberOfStudents):
+    self.name = name
+    self.level = level
+    self.numberOfStudents = numberOfStudents
+
+  def get_name(self):
+    return self.name
+
+  def get_level(self):
+    return self.level
+  
+  def get_numberOfStudents(self):
+    return self.numberOfStudents
+
+  def set_numberOfStudents(self,newNumberOfStudents):
+    self.numberOfStudents = newNumberOfStudents
+
+  # repr returns the object representation in string format
+  def __repr__(self):
+      return f'A {self.level} school named {self.name} with {self.numberOfStudents} students'
+
+# tester function
+# school1= School('nameself','level2','10')
+# print(school1)
+
+
+class PrimarySchool(School):
+  # def __init__ is used to make an instance of the variable, thus parameter 'level' is not needed
+  def __init__(self, name, numberOfStudents,pickupPolicy):
+    # super(). prevents the class from directly referring to base class
+    # super().__init__() -> sets the parameters relevent to the instance variable
+    # thus fixed parameter level should go in the super().__init__ method
+    super().__init__(name,'primary',numberOfStudents)
+
+    # when an instance is printed, information in super().__init__() is printed
+    # pickupPolicy doesn't go in the super() because its irrelevant to other classes
+    # and when we print the instance variable from class PrimarySchool we don't know to see the pickupPolicy parameter
+    self.pickupPolicy = pickupPolicy
+
+  def get_pickupPolicy(self):
+    return self.pickupPolicy
+
+  # override __repr__() method, use parent class' __repr__() method to avoid repetition
+  def __repr__(self):
+    SchoolRepr = super().__repr__()
+    return SchoolRepr + ' The pickup policy is {pickupPolicy}'.format(pickupPolicy = self.pickupPolicy)
+
+# primaryschool12 = PrimarySchool('bha','23','darnpickup')
+# print(primaryschool12)
+
+class HighSchool(School):
+  def __init__(self,name,numberOfStudents,sportsTeams):
+    super().__init__(name,'high',numberOfStudents)
+    self.sportsTeams = sportsTeams
+
+  def get_sportsTeams(self):
+    return self.sportsTeams
+  
+  def __repr__(self):
+    SchoolRepr = super().__repr__()
+    return SchoolRepr + ' the sports teams in this school are the following: {sportsTeams}'.format(sportsTeams = self.sportsTeams)
+    
+
+highschool123 = HighSchool('bha2',300,['this','that','idc'])
+
+print(highschool123)
+
+
